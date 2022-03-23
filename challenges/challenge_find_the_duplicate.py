@@ -12,29 +12,28 @@ def my_sort(array):
     return array
 
 
-def binary_search(ordered_nums, index):
+def binary_search(array, index):
     low_index = 0
-    high_index = len(ordered_nums) - 1
+    high_index = len(array) - 1
     while high_index > low_index:
         middle_index = (high_index + low_index) // 2
         if (
-            ordered_nums[index] == ordered_nums[middle_index]
+            array[index] == array[middle_index]
             and index != middle_index
         ):
-            return ordered_nums[index]
+            return array[index]
 
-        if ordered_nums[index] < ordered_nums[middle_index]:
+        if array[index] < array[middle_index]:
             high_index = middle_index - 1
-        else:
-            low_index = middle_index + 1
-    return False
+
+        low_index = middle_index + 1
 
 
 def find_duplicate(nums):
-    ordered_nums = my_sort(nums)
-    for index in range(len(ordered_nums)):
-        if not isinstance(ordered_nums[index], int) or ordered_nums[index] < 0:
+    sorted_nums = my_sort(nums)
+    for index in range(len(sorted_nums)):
+        if not isinstance(sorted_nums[index], int) or sorted_nums[index] < 0:
             return False
-        if binary_search(ordered_nums, index):
-            return binary_search(ordered_nums, index)
+        if binary_search(sorted_nums, index):
+            return binary_search(sorted_nums, index)
     return False
